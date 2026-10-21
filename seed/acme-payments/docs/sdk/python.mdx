@@ -1,0 +1,35 @@
+---
+title: Python SDK
+description: The official Python library for Acme Pay.
+---
+
+# Python SDK
+
+Install the official library:
+
+```bash
+pip install acmepay
+```
+
+## Charging a card
+
+`acmepay.Charge.create` wraps `POST /v1/charges`:
+
+```python
+import acmepay
+
+acmepay.api_key = "sk_test_acme_demo_key"
+
+charge = acmepay.Charge.create(
+    amount=2000,
+    currency="usd",
+    source="tok_visa",
+)
+print(charge.id)
+```
+
+## Saved cards
+
+```python
+acmepay.Charge.create(amount=500, currency="usd", source="card_1NfA2b")
+```
