@@ -1,0 +1,45 @@
+---
+title: Charges
+description: Create, retrieve, and list charges.
+---
+
+# Charges
+
+A charge represents a single attempt to move money from a customer's card.
+
+## Create a charge
+
+`POST /v1/charges`
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `amount` | integer | required | Amount in cents. |
+| `currency` | string | optional | Three-letter ISO code. Defaults to `usd`. |
+| `source` | string | required | A card token such as `tok_visa`. |
+| `description` | string | optional | Shown on the receipt. |
+
+```js
+const charge = await acme.charges.create({
+  amount: 2000,
+  currency: 'usd',
+  source: 'tok_visa',
+});
+```
+
+## Retrieve a charge
+
+`GET /v1/charges/{id}`
+
+```bash
+curl https://api.acmepay.dev/v1/charges/ch_3Nf9 \
+  -u sk_test_acme_demo_key:
+```
+
+## List charges
+
+`GET /v1/charges/list` returns charges in reverse chronological order.
+
+```bash
+curl "https://api.acmepay.dev/v1/charges/list?limit=10&customer=cus_9s6X" \
+  -u sk_test_acme_demo_key:
+```
