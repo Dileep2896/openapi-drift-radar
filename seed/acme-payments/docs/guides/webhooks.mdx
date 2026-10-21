@@ -1,0 +1,30 @@
+---
+title: Webhooks
+description: Get notified when events happen in your account.
+---
+
+# Webhooks
+
+Acme Pay sends webhook events to your endpoint when something happens in your account.
+
+## Register an endpoint
+
+```bash
+curl https://api.acmepay.dev/v1/webhook_endpoints \
+  -u sk_test_acme_demo_key: \
+  -d url="https://example.com/hooks/acme" \
+  -d "enabled_events[]=charge.succeeded"
+```
+
+## Event payload
+
+```json
+{
+  "type": "charge.succeeded",
+  "data": {
+    "object": { "id": "ch_3Nf9", "amount": 2000, "currency": "usd", "source": "tok_visa" }
+  }
+}
+```
+
+Verify the `Acme-Signature` header before trusting the payload.

@@ -1,0 +1,25 @@
+---
+title: Refunds
+description: Return money to a customer.
+---
+
+# Refunds
+
+Refund all or part of a charge with `POST /v1/refunds`.
+
+## Choosing a reason
+
+Set `reason` so your finance team can reconcile refunds:
+
+- `requested_by_customer`: the customer asked for their money back.
+- `fraudulent`: you believe the charge was fraudulent.
+- `duplicate_charge`: the customer was charged twice by mistake.
+
+```python
+import acmepay
+
+acmepay.Refund.create(
+    charge="ch_3Nf9",
+    reason="duplicate_charge",
+)
+```
