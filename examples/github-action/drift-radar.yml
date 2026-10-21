@@ -1,0 +1,40 @@
+# EXAMPLE ONLY. It lives outside .github/workflows, so it never runs in this repo.
+# Copy it to .github/workflows/drift-radar.yml in your API repo (and drop the `if:` guard) to post a
+# Drift Radar report on every PR that touches the spec.
+name: OpenAPI Drift Radar
+
+on:
+  pull_request:
+    paths:
+      - "openapi.yaml"
+      - "docs/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  radar:
+    if: github.repository != 'Dileep2896/openapi-drift-radar'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Spec from the base branch
+        run: git show "origin/${{ github.base_ref }}:openapi.yaml" > /tmp/openapi.before.yaml
+
+      - name: Run the radar
+        id: radar
+        run: |
+          uvx --from git+https://github.com/Dileep2896/openapi-drift-radar drift-radar \
+            --before /tmp/openapi.before.yaml --after openapi.yaml --docs docs --format md > radar.md
+
+      - name: Comment on the PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: drift-radar
+          path: radar.md
