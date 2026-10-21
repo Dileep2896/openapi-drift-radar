@@ -1,0 +1,65 @@
+{
+  "scenario": "acme-payments",
+  "stale_refs": 15,
+  "impacted_pages": 6,
+  "pages_scanned": 8,
+  "changes": 7,
+  "breaking": 4,
+  "scan_ms": 9.32,
+  "cited_pct": 100,
+  "noop_llm_tokens": 0,
+  "top_page": "api/charges.mdx",
+  "pages": [
+    {
+      "path": "api/charges.mdx",
+      "hits": 5,
+      "lines": [
+        17,
+        18,
+        25,
+        40,
+        43
+      ]
+    },
+    {
+      "path": "api/customers.mdx",
+      "hits": 2,
+      "lines": [
+        23,
+        28
+      ]
+    },
+    {
+      "path": "guides/refunds.mdx",
+      "hits": 2,
+      "lines": [
+        16,
+        23
+      ]
+    },
+    {
+      "path": "quickstart.mdx",
+      "hits": 2,
+      "lines": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "sdk/python.mdx",
+      "hits": 2,
+      "lines": [
+        26,
+        34
+      ]
+    },
+    {
+      "path": "changelog.mdx",
+      "hits": 2,
+      "lines": [
+        10,
+        15
+      ]
+    }
+  ]
+}
