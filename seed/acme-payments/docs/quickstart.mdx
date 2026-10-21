@@ -1,0 +1,30 @@
+---
+title: Quickstart
+description: Make your first Acme Pay charge in five minutes.
+---
+
+# Quickstart
+
+Acme Pay lets you accept card payments with a single API call. This guide walks you
+through creating your first charge with `POST /v1/charges`.
+
+## 1. Get your API key
+
+Grab a test key from the dashboard. Test keys start with `sk_test_`.
+
+## 2. Create a charge
+
+```bash
+curl https://api.acmepay.dev/v1/charges \
+  -u sk_test_acme_demo_key: \
+  -d amount=2000 \
+  -d currency=usd \
+  -d source=tok_visa
+```
+
+The `source` parameter accepts a card token from Acme.js.
+
+## 3. Next steps
+
+- Read the [Charges reference](/api/charges).
+- Set up [webhooks](/guides/webhooks) to hear about successful payments.
