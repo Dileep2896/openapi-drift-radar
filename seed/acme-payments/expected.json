@@ -1,0 +1,37 @@
+{
+  "changes": [
+    {"kind": "endpoint_added", "method": "GET", "path": "/v1/charges", "name": null},
+    {"kind": "param_renamed", "method": "POST", "path": "/v1/charges", "name": "source"},
+    {"kind": "param_became_required", "method": "POST", "path": "/v1/charges", "name": "currency"},
+    {"kind": "endpoint_deprecated", "method": "GET", "path": "/v1/charges/list", "name": null},
+    {"kind": "response_field_removed", "method": "GET", "path": "/v1/customers/{id}", "name": "default_source"},
+    {"kind": "endpoint_added", "method": "POST", "path": "/v1/payment_intents", "name": null},
+    {"kind": "enum_value_removed", "method": "POST", "path": "/v1/refunds", "name": "reason"}
+  ],
+  "hits": [
+    ["api/charges.mdx", 17, "param_became_required", "table"],
+    ["api/charges.mdx", 18, "param_renamed", "table"],
+    ["api/charges.mdx", 25, "param_renamed", "code"],
+    ["api/charges.mdx", 40, "endpoint_deprecated", "prose"],
+    ["api/charges.mdx", 43, "endpoint_deprecated", "code"],
+    ["api/customers.mdx", 23, "response_field_removed", "code"],
+    ["api/customers.mdx", 28, "response_field_removed", "prose"],
+    ["changelog.mdx", 10, "endpoint_deprecated", "prose"],
+    ["changelog.mdx", 15, "enum_value_removed", "prose"],
+    ["guides/refunds.mdx", 16, "enum_value_removed", "prose"],
+    ["guides/refunds.mdx", 23, "enum_value_removed", "code"],
+    ["quickstart.mdx", 22, "param_renamed", "code"],
+    ["quickstart.mdx", 25, "param_renamed", "prose"],
+    ["sdk/python.mdx", 26, "param_renamed", "code"],
+    ["sdk/python.mdx", 34, "param_renamed", "code"]
+  ],
+  "impact_order": [
+    "api/charges.mdx",
+    "api/customers.mdx",
+    "guides/refunds.mdx",
+    "quickstart.mdx",
+    "sdk/python.mdx",
+    "changelog.mdx"
+  ],
+  "unaffected": ["faq.md", "guides/webhooks.mdx"]
+}

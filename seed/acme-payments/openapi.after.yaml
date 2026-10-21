@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Acme Pay API
+  version: "2026-10-01"
+  description: Fictional payments API used by the OpenAPI Drift Radar demo.
+servers:
+  - url: https://api.acmepay.dev
+paths:
+  /v1/charges:
+    get:
+      operationId: listChargesV2
+      summary: List charges
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - name: customer
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A page of charges.
+    post:
+      operationId: createCharge
+      summary: Create a charge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount, currency, payment_method]
+              properties:
+                amount:
+                  type: integer
+                  description: Amount in the smallest currency unit.
+                currency:
+                  type: string
+                  description: Three-letter ISO currency code.
+                payment_method:
+                  type: string
+                  description: A payment method id (pm_...).
+                description:
+                  type: string
+      responses:
+        "200":
+          description: The created charge.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Charge"
+  /v1/charges/list:
+    get:
+      operationId: listCharges
+      summary: List charges (deprecated)
+      deprecated: true
+      x-replaced-by: GET /v1/charges
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - name: customer
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A page of charges.
+  /v1/charges/{id}:
+    get:
+      operationId: retrieveCharge
+      summary: Retrieve a charge
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: The charge.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Charge"
+  /v1/customers/{id}:
+    get:
+      operationId: retrieveCustomer
+      summary: Retrieve a customer
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: The customer.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+  /v1/payment_intents:
+    post:
+      operationId: createPaymentIntent
+      summary: Create a payment intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount, currency]
+              properties:
+                amount:
+                  type: integer
+                currency:
+                  type: string
+                payment_method:
+                  type: string
+      responses:
+        "200":
+          description: The payment intent.
+  /v1/refunds:
+    post:
+      operationId: createRefund
+      summary: Refund a charge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [charge]
+              properties:
+                charge:
+                  type: string
+                amount:
+                  type: integer
+                reason:
+                  type: string
+                  enum: [requested_by_customer, fraudulent]
+      responses:
+        "200":
+          description: The refund.
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+  schemas:
+    Charge:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        status:
+          type: string
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        created:
+          type: integer
