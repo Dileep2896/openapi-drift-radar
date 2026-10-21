@@ -1,0 +1,16 @@
+---
+title: Changelog
+description: What changed in the Acme Pay API.
+---
+
+# Changelog
+
+## 2026-08-12
+
+- Added pagination to `GET /v1/charges/list` with the `limit` parameter.
+- Charges now accept a `description` that appears on receipts.
+
+## 2026-07-02
+
+- `POST /v1/refunds` now accepts a `reason` of `duplicate_charge`.
+- New webhook event `charge.refunded`.
