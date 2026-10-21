@@ -1,0 +1,28 @@
+---
+title: Customers
+description: Store customers and their saved payment details.
+---
+
+# Customers
+
+Customer objects let you store payment details and reuse them for later charges.
+
+## Retrieve a customer
+
+`GET /v1/customers/{id}`
+
+```bash
+curl https://api.acmepay.dev/v1/customers/cus_9s6XKzkNRiz8i3 \
+  -u sk_test_acme_demo_key:
+```
+
+```json
+{
+  "id": "cus_9s6XKzkNRiz8i3",
+  "email": "jenny@example.com",
+  "default_source": "card_1NfA2b",
+  "created": 1727740800
+}
+```
+
+Use `default_source` to charge a returning customer without asking for card details again.
