@@ -1,0 +1,18 @@
+[
+  {
+    "id": "acme-payments",
+    "title": "Acme Pay: 2026-10-01 API release",
+    "description": "PR #482 renames `source` to `payment_method`, makes `currency` required, drops `default_source`, removes a refund reason, deprecates the old list endpoint, and adds payment intents.",
+    "before": "acme-payments/openapi.before.yaml",
+    "after": "acme-payments/openapi.after.yaml",
+    "docs_dir": "acme-payments/docs"
+  },
+  {
+    "id": "noop",
+    "title": "Acme Pay: README-only PR",
+    "description": "PR #483 touches the spec file's formatting but no API contract. The radar should skip the agent run.",
+    "before": "noop/openapi.before.yaml",
+    "after": "noop/openapi.after.yaml",
+    "docs_dir": "acme-payments/docs"
+  }
+]
